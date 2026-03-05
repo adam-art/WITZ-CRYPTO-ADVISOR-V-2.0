@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WITZ — Dokumentasi Pengguna</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --lime:#C6FF00; --pink:#FF2D78; --cyan:#00E5FF; --green:#00FF87;
+  --navy:#03030A; --navy2:#07070F; --navy3:#0D0D1A;
+  --border:rgba(198,255,0,0.09); --card:rgba(198,255,0,0.025);
+  --text:rgba(255,255,255,0.85); --muted:rgba(255,255,255,0.38);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.7;display:flex;min-height:100vh}
+
+/* ── Sidebar ── */
+#sidebar{
+  position:fixed;top:0;left:0;width:260px;height:100vh;overflow-y:auto;
+  background:var(--navy2);border-right:1px solid var(--border);
+  padding:0;display:flex;flex-direction:column;z-index:100;
+  scrollbar-width:thin;scrollbar-color:rgba(198,255,0,0.15) transparent
+}
+.sb-logo{display:flex;align-items:center;gap:14px;padding:28px 22px 20px}
+.sb-w{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,var(--lime),#88CC00);
+  display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;
+  font-weight:900;font-size:22px;color:var(--navy);box-shadow:0 0 22px rgba(198,255,0,0.3);flex-shrink:0}
+.sb-title{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:#fff;letter-spacing:-0.04em;line-height:1}
+.sb-sub{font-size:9px;color:var(--muted);letter-spacing:0.18em;text-transform:uppercase;margin-top:3px}
+.sb-section{padding:6px 12px 4px;font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(198,255,0,0.35);margin-top:8px}
+.sb-link{display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:10px;margin:2px 10px;
+  color:var(--muted);font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;transition:all 0.15s}
+.sb-link:hover,.sb-link.active{background:rgba(198,255,0,0.08);color:var(--lime)}
+.sb-link .ic{width:18px;text-align:center;font-size:13px;flex-shrink:0}
+.sb-badge{margin-left:auto;font-size:9px;font-weight:700;padding:2px 7px;border-radius:5px;
+  background:rgba(198,255,0,0.1);color:rgba(198,255,0,0.7);border:1px solid rgba(198,255,0,0.18)}
+#sidebar::-webkit-scrollbar{width:3px}
+#sidebar::-webkit-scrollbar-thumb{background:rgba(198,255,0,0.15);border-radius:2px}
+
+/* ── Main ── */
+#main{margin-left:260px;flex:1;padding:0}
+
+/* ── Hero ── */
+.hero{
+  padding:70px 64px 60px;position:relative;overflow:hidden;
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(135deg,rgba(198,255,0,0.03) 0%,transparent 60%)
+}
+.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;
+  border-radius:50%;background:radial-gradient(ellipse,rgba(198,255,0,0.06) 0%,transparent 65%);pointer-events:none}
+.hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--lime);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.hero-eyebrow::before{content:'';width:24px;height:2px;background:var(--lime);border-radius:2px;display:inline-block}
+.hero h1{font-family:'Syne',sans-serif;font-size:48px;font-weight:800;letter-spacing:-0.04em;color:#fff;line-height:1.08;margin-bottom:20px}
+.hero h1 span{color:var(--lime)}
+.hero-desc{font-size:17px;color:rgba(255,255,255,0.55);max-width:600px;line-height:1.7;margin-bottom:32px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.55)}
+.tag.lime{background:rgba(198,255,0,0.08);border-color:rgba(198,255,0,0.2);color:rgba(198,255,0,0.8)}
+
+/* ── Content area ── */
+.content{padding:56px 64px;max-width:900px}
+section{margin-bottom:72px;scroll-margin-top:24px}
+section:last-child{margin-bottom:40px}
+
+h2{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;letter-spacing:-0.03em;color:#fff;
+  margin-bottom:8px;display:flex;align-items:center;gap:12px}
+h2 .sec-num{font-size:12px;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--lime);
+  background:rgba(198,255,0,0.1);border:1px solid rgba(198,255,0,0.2);
+  padding:3px 9px;border-radius:6px;letter-spacing:0.05em}
+.section-line{width:100%;height:1px;background:linear-gradient(90deg,var(--border),transparent);margin-bottom:28px}
+h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:rgba(255,255,255,0.9);margin:28px 0 12px;letter-spacing:-0.02em}
+h4{font-size:14px;font-weight:700;color:var(--lime);margin:20px 0 8px;text-transform:uppercase;letter-spacing:0.08em}
+p{color:rgba(255,255,255,0.62);line-height:1.75;margin-bottom:14px}
+p:last-child{margin-bottom:0}
+strong{color:rgba(255,255,255,0.85);font-weight:600}
+ul,ol{padding-left:22px;color:rgba(255,255,255,0.6);line-height:1.75}
+li{margin-bottom:6px}
+li strong{color:rgba(255,255,255,0.82)}
+
+/* ── Cards ── */
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px 24px;margin:16px 0}
+.card.glow{border-color:rgba(198,255,0,0.16);box-shadow:0 0 30px rgba(198,255,0,0.05)}
+.card.warn{background:rgba(255,45,120,0.05);border-color:rgba(255,45,120,0.18)}
+.card.info{background:rgba(0,229,255,0.04);border-color:rgba(0,229,255,0.14)}
+.card.success{background:rgba(0,255,135,0.04);border-color:rgba(0,255,135,0.14)}
+
+/* ── Steps ── */
+.steps{display:flex;flex-direction:column;gap:0}
+.step{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.04);position:relative}
+.step:last-child{border-bottom:none}
+.step-num{width:36px;height:36px;border-radius:10px;background:rgba(198,255,0,0.1);border:1px solid rgba(198,255,0,0.25);
+  display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;
+  font-weight:700;font-size:13px;color:var(--lime);flex-shrink:0;margin-top:2px}
+.step-body h4{margin:0 0 6px;font-size:15px;font-weight:700;color:rgba(255,255,255,0.88);text-transform:none;letter-spacing:0}
+.step-body p{margin:0;font-size:14px}
+
+/* ── Code ── */
+pre,code{font-family:'JetBrains Mono',monospace}
+pre{background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.08);border-radius:12px;
+  padding:18px 22px;overflow-x:auto;margin:14px 0;font-size:13px;line-height:1.6;
+  scrollbar-width:thin;scrollbar-color:rgba(198,255,0,0.15) transparent}
+code{font-size:12.5px;background:rgba(198,255,0,0.08);color:var(--lime);padding:2px 7px;border-radius:5px;
+  border:1px solid rgba(198,255,0,0.15)}
+pre code{background:none;color:rgba(255,255,255,0.75);padding:0;border:none}
+.cm{color:rgba(255,255,255,0.3)}
+.ck{color:var(--cyan)}
+.cv{color:#FFB800}
+.cl{color:var(--lime)}
+
+/* ── Table ── */
+.tbl{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.tbl th{padding:10px 14px;text-align:left;font-size:10px;font-weight:700;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border)}
+.tbl td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.04);color:rgba(255,255,255,0.65);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:rgba(255,255,255,0.015)}
+.tbl td strong{color:rgba(255,255,255,0.85)}
+
+/* ── Pill badges ── */
+.pill{display:inline-flex;align-items:center;padding:3px 10px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:0.04em}
+.pill.lime{background:rgba(198,255,0,0.1);color:var(--lime);border:1px solid rgba(198,255,0,0.22)}
+.pill.cyan{background:rgba(0,229,255,0.08);color:var(--cyan);border:1px solid rgba(0,229,255,0.18)}
+.pill.pink{background:rgba(255,45,120,0.08);color:var(--pink);border:1px solid rgba(255,45,120,0.18)}
+.pill.orange{background:rgba(255,120,0,0.08);color:#FF7800;border:1px solid rgba(255,120,0,0.18)}
+.pill.green{background:rgba(0,255,135,0.08);color:var(--green);border:1px solid rgba(0,255,135,0.18)}
+
+/* ── AI Provider cards ── */
+.ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.ai-card{padding:18px 20px;border-radius:14px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.025)}
+.ai-card .ai-name{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:4px}
+.ai-card .ai-model{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:8px}
+.ai-card .ai-desc{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.55}
+.ai-card .ai-badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:6px;font-size:10px;font-weight:700;margin-top:10px}
+
+/* ── Feature grid ── */
+.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.feat{padding:18px 20px;border-radius:14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06)}
+.feat .feat-icon{font-size:22px;margin-bottom:10px}
+.feat .feat-title{font-size:14px;font-weight:700;color:rgba(255,255,255,0.85);margin-bottom:4px}
+.feat .feat-desc{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.55}
+
+/* ── FAQ ── */
+.faq{margin:10px 0;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.faq-q{padding:14px 18px;font-weight:600;font-size:14px;cursor:pointer;color:rgba(255,255,255,0.8);
+  display:flex;justify-content:space-between;align-items:center;user-select:none}
+.faq-q:hover{color:#fff;background:rgba(255,255,255,0.02)}
+.faq-q::after{content:'▸';font-size:12px;color:var(--muted);transition:transform 0.2s}
+.faq.open .faq-q::after{transform:rotate(90deg);color:var(--lime)}
+.faq-a{display:none;padding:0 18px 14px;font-size:14px;color:rgba(255,255,255,0.5);line-height:1.7;border-top:1px solid rgba(255,255,255,0.05)}
+.faq.open .faq-a{display:block}
+
+/* ── Highlight box ── */
+.hl{display:flex;gap:12px;padding:14px 18px;border-radius:12px;margin:14px 0;align-items:flex-start}
+.hl.lime{background:rgba(198,255,0,0.05);border:1px solid rgba(198,255,0,0.15)}
+.hl.warn{background:rgba(255,45,120,0.06);border:1px solid rgba(255,45,120,0.18)}
+.hl.info{background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.15)}
+.hl .hl-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.hl p{margin:0;font-size:13.5px}
+
+/* ── Security check list ── */
+.sec-check{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.sec-item{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;border-radius:10px;background:rgba(0,255,135,0.03);border:1px solid rgba(0,255,135,0.1)}
+.sec-item .si-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.sec-item .si-title{font-size:13px;font-weight:700;color:rgba(255,255,255,0.8);margin-bottom:2px}
+.sec-item .si-desc{font-size:12px;color:rgba(255,255,255,0.42)}
+
+/* ── Footer ── */
+footer{border-top:1px solid var(--border);padding:28px 64px;margin-left:260px;display:flex;align-items:center;justify-content:space-between}
+footer .f-left{font-size:13px;color:var(--muted)}
+footer .f-ver{font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 10px;border-radius:6px;
+  background:rgba(198,255,0,0.08);color:var(--lime);border:1px solid rgba(198,255,0,0.18)}
+
+/* ── Scroll progress ── */
+#prog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--lime),#88CC00);z-index:999;transition:width 0.1s}
+
+@media(max-width:768px){
+  #sidebar{width:100%;height:auto;position:relative}
+  #main,footer{margin-left:0}
+  .content{padding:32px 24px}
+  .hero{padding:40px 24px}
+  .ai-grid,.feat-grid{grid-template-columns:1fr}
+  h2{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<!-- ══ SIDEBAR ══════════════════════════════════════════════ -->
+<nav id="sidebar">
+  <div class="sb-logo">
+    <div class="sb-w">W</div>
+    <div>
+      <div class="sb-title">WITZ</div>
+      <div class="sb-sub">Dokumentasi v2.0</div>
+    </div>
+  </div>
+
+  <div class="sb-section">Memulai</div>
+  <a href="#pengantar"    class="sb-link active"><span class="ic">◈</span>Pengantar</a>
+  <a href="#instalasi"    class="sb-link"><span class="ic">⬡</span>Instalasi<span class="sb-badge">MULAI DI SINI</span></a>
+  <a href="#konfigurasi"  class="sb-link"><span class="ic">◑</span>Konfigurasi .env</a>
+  <a href="#wallet"       class="sb-link"><span class="ic">🔒</span>Koneksi Wallet</a>
+
+  <div class="sb-section">Fitur Utama</div>
+  <a href="#dashboard"    class="sb-link"><span class="ic">◔</span>Dashboard</a>
+  <a href="#portofolio"   class="sb-link"><span class="ic">◇</span>Portofolio</a>
+  <a href="#witz-ai"      class="sb-link"><span class="ic">◬</span>WITZ AI</a>
+  <a href="#defi-risk"    class="sb-link"><span class="ic">◑</span>DeFi Risk</a>
+  <a href="#transaksi"    class="sb-link"><span class="ic">◈</span>Transaksi</a>
+  <a href="#analitik"     class="sb-link"><span class="ic">⬡</span>Analitik</a>
+  <a href="#market"       class="sb-link"><span class="ic">◫</span>Market Live</a>
+
+  <div class="sb-section">AI & Keamanan</div>
+  <a href="#multi-ai"     class="sb-link"><span class="ic">◬</span>Multi-AI Provider</a>
+  <a href="#keamanan"     class="sb-link"><span class="ic">🛡</span>Keamanan</a>
+  <a href="#troubleshoot" class="sb-link"><span class="ic">⚠</span>Troubleshooting</a>
+  <a href="#faq"          class="sb-link"><span class="ic">?</span>FAQ</a>
+  <a href="#glossary"     class="sb-link"><span class="ic">◇</span>Glosarium</a>
+</nav>
+
+<!-- ══ MAIN ════════════════════════════════════════════════ -->
+<div id="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Dokumentasi Resmi</div>
+    <h1>Panduan Pengguna<br/><span>WITZ</span></h1>
+    <p class="hero-desc">
+      Panduan lengkap untuk menggunakan WITZ — aplikasi manajemen portofolio kripto berbasis AI dengan data real-time, analisis risiko DeFi, dan dukungan 4 model AI terdepan.
+    </p>
+    <div class="hero-tags">
+      <span class="tag lime">v2.0 Terbaru</span>
+      <span class="tag">Bahasa Indonesia</span>
+      <span class="tag">Data Real-Time</span>
+      <span class="tag">Multi-AI Provider</span>
+      <span class="tag">Keamanan Wallet</span>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ══ 1. PENGANTAR ══════════════════════════════════════ -->
+    <section id="pengantar">
+      <h2><span class="sec-num">01</span>Pengantar</h2>
+      <div class="section-line"></div>
+
+      <p>
+        <strong>WITZ</strong> adalah aplikasi manajemen portofolio kripto generasi berikutnya yang menggabungkan data pasar real-time dari CoinGecko dengan kecerdasan buatan dari 4 provider AI terdepan: Anthropic Claude, OpenAI GPT-4, Google Gemini, dan Groq Llama.
+      </p>
+
+      <div class="feat-grid">
+        <div class="feat"><div class="feat-icon">📊</div><div class="feat-title">Harga Real-Time</div><div class="feat-desc">Data diperbarui otomatis setiap 30 detik dari CoinGecko tanpa API key tambahan.</div></div>
+        <div class="feat"><div class="feat-icon">🤖</div><div class="feat-title">4 AI Terintegrasi</div><div class="feat-desc">Pilih dari Claude, GPT-4, Gemini, atau Llama — semua mendukung konteks portofolio live.</div></div>
+        <div class="feat"><div class="feat-icon">🔒</div><div class="feat-title">Keamanan Wallet</div><div class="feat-desc">Aplikasi sepenuhnya terkunci tanpa koneksi wallet. Akses read-only, tidak ada akses kunci privat.</div></div>
+        <div class="feat"><div class="feat-icon">⚠️</div><div class="feat-title">Analisis Risiko DeFi</div><div class="feat-desc">Matriks risiko protokol DeFi lengkap dengan AI scan berbasis portofolio nyata Anda.</div></div>
+        <div class="feat"><div class="feat-icon">📈</div><div class="feat-title">Analitik Lengkap</div><div class="feat-desc">Chart 30 hari per aset, performa komparatif, dan histori performa portofolio 90 hari.</div></div>
+        <div class="feat"><div class="feat-icon">🌐</div><div class="feat-title">Market Intelligence</div><div class="feat-desc">Dominasi BTC, total market cap, trending coin, dan data volume 24 jam seluruh pasar.</div></div>
+      </div>
+
+      <div class="hl warn">
+        <span class="hl-icon">⚠️</span>
+        <p><strong>Perhatian:</strong> WITZ adalah alat edukasi dan analisis. Informasi yang disajikan bukan merupakan saran investasi atau keuangan resmi. Selalu lakukan riset mandiri sebelum mengambil keputusan finansial.</p>
+      </div>
+    </section>
+
+    <!-- ══ 2. INSTALASI ══════════════════════════════════════ -->
+    <section id="instalasi">
+      <h2><span class="sec-num">02</span>Instalasi & Menjalankan</h2>
+      <div class="section-line"></div>
+
+      <h3>Prasyarat Sistem</h3>
+      <table class="tbl">
+        <thead><tr><th>Software</th><th>Versi Minimum</th><th>Cara Cek</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Node.js</strong></td><td>18.0.0 atau lebih baru</td><td><code>node --version</code></td></tr>
+          <tr><td><strong>npm</strong></td><td>9.0.0 atau lebih baru</td><td><code>npm --version</code></td></tr>
+          <tr><td><strong>Browser</strong></td><td>Chrome 110+, Firefox 110+, Edge 110+</td><td>Cek versi browser Anda</td></tr>
+          <tr><td><strong>Koneksi Internet</strong></td><td>Diperlukan untuk data live</td><td>—</td></tr>
+        </tbody>
+      </table>
+
+      <div class="hl info">
+        <span class="hl-icon">💡</span>
+        <p>Belum punya Node.js? Download gratis di <strong>nodejs.org</strong>. Pilih versi LTS (Long Term Support) yang direkomendasikan.</p>
+      </div>
+
+      <h3>Langkah Instalasi</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Ekstrak file ZIP</h4>
+            <p>Ekstrak file <code>witz-crypto.zip</code> yang sudah Anda download ke folder pilihan Anda.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Buka Terminal / Command Prompt</h4>
+            <p>Masuk ke folder hasil ekstrak menggunakan terminal:</p>
+<pre><code><span class="cm"># Masuk ke folder proyek</span>
+cd witz-crypto</code></pre>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Install dependencies</h4>
+            <p>Jalankan perintah berikut untuk mengunduh semua library yang dibutuhkan:</p>
+<pre><code>npm install</code></pre>
+            <p>Proses ini memerlukan koneksi internet dan memakan waktu 1–3 menit tergantung kecepatan internet.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h4>Salin file environment</h4>
+            <p>Buat file konfigurasi Anda:</p>
+<pre><code><span class="cm"># Mac/Linux:</span>
+cp .env.example .env.local
+
+<span class="cm"># Windows (Command Prompt):</span>
+copy .env.example .env.local</code></pre>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <h4>Jalankan server pengembangan</h4>
+<pre><code>npm run dev</code></pre>
+            <p>Buka browser dan kunjungi <strong>http://localhost:5173</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hl lime">
+        <span class="hl-icon">✅</span>
+        <p>Jika berhasil, Anda akan melihat layar <strong>koneksi wallet WITZ</strong>. Data pasar sudah otomatis berjalan — tidak perlu konfigurasi apapun untuk melihat harga!</p>
+      </div>
+    </section>
+
+    <!-- ══ 3. KONFIGURASI .ENV ═══════════════════════════════ -->
+    <section id="konfigurasi">
+      <h2><span class="sec-num">03</span>Konfigurasi File .env</h2>
+      <div class="section-line"></div>
+
+      <p>
+        WITZ menggunakan file <code>.env.local</code> untuk menyimpan semua kunci API dengan aman. <strong>API key tidak pernah disimpan di dalam kode aplikasi</strong> — semuanya dibaca dari environment variable saat aplikasi berjalan.
+      </p>
+
+      <div class="hl warn">
+        <span class="hl-icon">🚨</span>
+        <p><strong>Keamanan Penting:</strong> Jangan pernah mengunggah file <code>.env.local</code> ke GitHub atau berbagi isinya. File ini sudah tercatat di <code>.gitignore</code> secara otomatis.</p>
+      </div>
+
+      <h3>Struktur File .env.local</h3>
+<pre><code><span class="cm"># ── AI PROVIDERS (pilih minimal 1) ──────────────────────</span>
+<span class="ck">VITE_ANTHROPIC_API_KEY</span>=<span class="cv">sk-ant-api03-xxxxx</span>    <span class="cm"># Claude</span>
+<span class="ck">VITE_OPENAI_API_KEY</span>=<span class="cv">sk-xxxxx</span>               <span class="cm"># GPT-4</span>
+<span class="ck">VITE_GEMINI_API_KEY</span>=<span class="cv">AIza-xxxxx</span>            <span class="cm"># Gemini</span>
+<span class="ck">VITE_GROQ_API_KEY</span>=<span class="cv">gsk_xxxxx</span>              <span class="cm"># Llama (Groq)</span>
+
+<span class="cm"># ── PASAR (Tidak perlu API key) ──────────────────────────</span>
+<span class="cm"># CoinGecko Free bekerja otomatis tanpa konfigurasi</span>
+
+<span class="cm"># ── DATABASE (Opsional) ───────────────────────────────────</span>
+<span class="ck">VITE_SUPABASE_URL</span>=<span class="cv">https://xxxxx.supabase.co</span>
+<span class="ck">VITE_SUPABASE_ANON_KEY</span>=<span class="cv">eyJhbGci...</span></code></pre>
+
+      <h3>Cara Mendapatkan API Key (Gratis)</h3>
+      <table class="tbl">
+        <thead><tr><th>Provider</th><th>URL Daftar</th><th>Format Key</th><th>Tier Gratis</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Anthropic Claude</strong> ⭐</td><td>console.anthropic.com</td><td><code>sk-ant-api03-...</code></td><td>$5 kredit gratis</td></tr>
+          <tr><td><strong>OpenAI GPT-4</strong></td><td>platform.openai.com/api-keys</td><td><code>sk-...</code></td><td>$5 kredit gratis</td></tr>
+          <tr><td><strong>Google Gemini</strong></td><td>aistudio.google.com/app/apikey</td><td><code>AIza...</code></td><td>60 req/menit GRATIS</td></tr>
+          <tr><td><strong>Groq Llama</strong> 🔥</td><td>console.groq.com</td><td><code>gsk_...</code></td><td>14,400 req/hari GRATIS</td></tr>
+        </tbody>
+      </table>
+
+      <div class="hl lime">
+        <span class="hl-icon">💡</span>
+        <p><strong>Rekomendasi untuk pemula:</strong> Daftar <strong>Groq</strong> (gratis penuh, tidak perlu kartu kredit) untuk mencoba fitur AI terlebih dahulu. Setelah yakin, upgrade ke Claude atau GPT-4 untuk analisis yang lebih mendalam.</p>
+      </div>
+
+      <h3>Cara Kerja Proxy Keamanan</h3>
+      <p>
+        WITZ menggunakan <strong>Vite proxy</strong> yang berjalan di server lokal untuk mengirimkan API key. Ini berarti:
+      </p>
+      <ul>
+        <li>API key <strong>tidak pernah terekspos di browser</strong> atau network tab DevTools</li>
+        <li>Permintaan ke AI dikirim melalui server lokal port 5173</li>
+        <li>Di production, gunakan backend server (Node.js/FastAPI) sebagai proxy</li>
+      </ul>
+    </section>
+
+    <!-- ══ 4. KONEKSI WALLET ══════════════════════════════════ -->
+    <section id="wallet">
+      <h2><span class="sec-num">04</span>Koneksi Wallet</h2>
+      <div class="section-line"></div>
+
+      <div class="hl warn">
+        <span class="hl-icon">🔒</span>
+        <p><strong>Keamanan Wajib:</strong> Seluruh fitur WITZ terkunci sampai wallet terhubung. Ini adalah lapisan keamanan utama — pengguna tanpa wallet tidak dapat mengakses data portofolio apapun.</p>
+      </div>
+
+      <h3>Layar Koneksi Wallet</h3>
+      <p>Saat pertama membuka WITZ, Anda akan melihat layar selamat datang dengan pilihan wallet. Ini adalah <strong>gerbang keamanan utama</strong> — aplikasi tidak dapat digunakan sama sekali sebelum wallet terhubung.</p>
+
+      <h3>Wallet yang Didukung</h3>
+      <table class="tbl">
+        <thead><tr><th>Wallet</th><th>Tipe</th><th>Platform</th><th>Cocok Untuk</th></tr></thead>
+        <tbody>
+          <tr><td><strong>MetaMask 🦊</strong></td><td>Software</td><td>Browser Extension</td><td>Pengguna harian, DeFi aktif</td></tr>
+          <tr><td><strong>WalletConnect 🔗</strong></td><td>Protocol</td><td>Mobile + QR Code</td><td>Multi-chain, fleksibel</td></tr>
+          <tr><td><strong>Coinbase Wallet 💎</strong></td><td>Software</td><td>Browser + Mobile</td><td>Pemula, mudah digunakan</td></tr>
+          <tr><td><strong>Ledger 🔐</strong></td><td>Hardware</td><td>USB Device</td><td>Keamanan maksimal, HODLer</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Proses Koneksi Langkah demi Langkah</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Buka WITZ di browser</h4>
+            <p>Kunjungi <code>http://localhost:5173</code>. Layar koneksi wallet akan muncul otomatis.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Klik "Hubungkan Wallet untuk Masuk"</h4>
+            <p>Tombol hijau di bagian bawah layar selamat datang.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Pilih wallet Anda</h4>
+            <p>Pilih salah satu dari 4 pilihan yang tersedia. Untuk demo, pilih wallet apapun — semua akan menghasilkan koneksi demo yang aman.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h4>Setujui koneksi di wallet Anda</h4>
+            <p>Wallet Anda akan meminta persetujuan koneksi. Ini hanya <strong>izin baca (read-only)</strong> — WITZ tidak meminta izin untuk transaksi atau tanda tangan apapun.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <h4>Masuk ke Dashboard</h4>
+            <p>Setelah terhubung, aplikasi otomatis memuat data portofolio dan harga live. Selamat datang di WITZ!</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Memutus Koneksi Wallet</h3>
+      <p>Klik nama wallet di sidebar kiri, lalu klik <strong>"Putuskan Koneksi"</strong>. Anda akan kembali ke layar koneksi dan semua data sesi akan dihapus dari memori browser.</p>
+
+      <div class="sec-check">
+        <div class="sec-item"><span class="si-icon">✅</span><div><div class="si-title">Read-Only Access</div><div class="si-desc">WITZ hanya membaca alamat wallet Anda, tidak pernah meminta izin tanda tangan atau transfer</div></div></div>
+        <div class="sec-item"><span class="si-icon">✅</span><div><div class="si-title">Tidak Ada Penyimpanan Kunci</div><div class="si-desc">Private key Anda tidak pernah meninggalkan perangkat dan tidak disimpan di WITZ</div></div></div>
+        <div class="sec-item"><span class="si-icon">✅</span><div><div class="si-title">Alamat Terenkripsi</div><div class="si-desc">Alamat wallet ditampilkan dalam format tersamarkan: 0x8f4a····2d1e</div></div></div>
+        <div class="sec-item"><span class="si-icon">✅</span><div><div class="si-title">Sesi Bersih</div><div class="si-desc">Semua data sesi terhapus otomatis ketika Anda menutup tab atau memutus koneksi</div></div></div>
+      </div>
+    </section>
+
+    <!-- ══ 5. DASHBOARD ══════════════════════════════════════ -->
+    <section id="dashboard">
+      <h2><span class="sec-num">05</span>Dashboard</h2>
+      <div class="section-line"></div>
+
+      <p>Dashboard adalah halaman utama WITZ yang memberikan gambaran lengkap kondisi portofolio Anda dalam satu tampilan.</p>
+
+      <h3>Kartu Statistik Utama</h3>
+      <p>Empat kartu di baris atas menampilkan:</p>
+      <ul>
+        <li><strong>Nilai Portofolio</strong> — Total nilai semua aset dalam USD, dengan animasi counter saat pertama dimuat</li>
+        <li><strong>P&L 24 Jam</strong> — Keuntungan atau kerugian hari ini. Hijau = untung, merah = rugi</li>
+        <li><strong>Total Aset</strong> — Jumlah token yang sedang dipantau</li>
+        <li><strong>Pasar Global 24J</strong> — Perubahan total market cap kripto dalam 24 jam</li>
+      </ul>
+
+      <h3>Chart Performa 90 Hari</h3>
+      <p>Grafik area di tengah menampilkan performa portofolio selama 90 hari terakhir, terindeks dari data harga Bitcoin. Hover di atas grafik untuk melihat nilai pada tanggal tertentu.</p>
+
+      <h3>Alokasi Per Sektor</h3>
+      <p>Grafik donut di kanan menampilkan distribusi portofolio berdasarkan kategori aset:</p>
+      <ul>
+        <li><strong>Store of Value</strong> — Bitcoin dan aset penyimpan nilai</li>
+        <li><strong>Smart Contract</strong> — Ethereum, Solana, dan platform Layer-1</li>
+        <li><strong>DeFi Lending</strong> — Protokol pinjam-meminjam seperti Aave</li>
+        <li><strong>DEX</strong> — Decentralized Exchange seperti Uniswap</li>
+        <li><strong>Layer 2</strong> — Solusi skalabilitas seperti Arbitrum dan Polygon</li>
+      </ul>
+
+      <h3>Ticker Bar Real-Time</h3>
+      <p>Bar berjalan di atas halaman menampilkan harga terkini semua aset portofolio secara real-time. Warna panah hijau (▲) menunjukkan kenaikan, merah (▼) menunjukkan penurunan.</p>
+
+      <h3>Tombol Cepat</h3>
+      <p>Klik <strong>"Tanya WITZ AI →"</strong> di pojok kanan atas untuk langsung membuka halaman AI Advisor dengan konteks portofolio Anda sudah termuat.</p>
+    </section>
+
+    <!-- ══ 6. PORTOFOLIO ══════════════════════════════════════ -->
+    <section id="portofolio">
+      <h2><span class="sec-num">06</span>Portofolio</h2>
+      <div class="section-line"></div>
+
+      <p>Halaman Portofolio menampilkan semua aset dalam tabel lengkap dengan data live dan fitur filter serta pengurutan.</p>
+
+      <h3>Kolom Tabel</h3>
+      <table class="tbl">
+        <thead><tr><th>Kolom</th><th>Deskripsi</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Aset</strong></td><td>Nama dan simbol token, beserta jumlah yang dimiliki</td></tr>
+          <tr><td><strong>Nilai</strong></td><td>Total nilai aset ini dalam USD (dapat diurutkan)</td></tr>
+          <tr><td><strong>Harga</strong></td><td>Harga per token saat ini dalam USD (live dari CoinGecko)</td></tr>
+          <tr><td><strong>24J</strong></td><td>Persentase perubahan harga dalam 24 jam terakhir (dapat diurutkan)</td></tr>
+          <tr><td><strong>Bobot</strong></td><td>Persentase aset ini dari total portofolio, dengan bar visual (dapat diurutkan)</td></tr>
+          <tr><td><strong>Risiko</strong></td><td>Tingkat risiko aset: LOW, MEDIUM, atau HIGH</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Filter Risiko</h3>
+      <p>Gunakan tombol filter di pojok kanan atas tabel untuk menyaring aset berdasarkan tingkat risiko:</p>
+      <ul>
+        <li><span class="pill lime">ALL</span> — Tampilkan semua aset</li>
+        <li><span class="pill lime">LOW</span> — Hanya aset berisiko rendah (Bitcoin, Ethereum)</li>
+        <li><span class="pill orange">MEDIUM</span> — Aset berisiko menengah (AAVE, LINK)</li>
+        <li><span class="pill pink">HIGH</span> — Aset berisiko tinggi (ARB, MATIC, UNI)</li>
+      </ul>
+
+      <h3>Pengurutan Kolom</h3>
+      <p>Klik header kolom <strong>Nilai</strong>, <strong>24J</strong>, atau <strong>Bobot</strong> untuk mengurutkan tabel berdasarkan kolom tersebut. Klik lagi untuk membalik urutan.</p>
+    </section>
+
+    <!-- ══ 7. WITZ AI ════════════════════════════════════════ -->
+    <section id="witz-ai">
+      <h2><span class="sec-num">07</span>WITZ AI</h2>
+      <div class="section-line"></div>
+
+      <p>
+        WITZ AI adalah asisten kecerdasan buatan yang terintegrasi langsung dengan data portofolio live Anda. Setiap pertanyaan yang Anda ajukan akan dijawab dengan mempertimbangkan nilai nyata, alokasi, dan perubahan harga terkini.
+      </p>
+
+      <div class="hl lime">
+        <span class="hl-icon">🔑</span>
+        <p><strong>Prasyarat:</strong> Anda perlu API key minimal satu provider AI yang sudah dikonfigurasi di file <code>.env.local</code>. Lihat bagian <a href="#konfigurasi" style="color:var(--cyan)">Konfigurasi .env</a> untuk panduan lengkap.</p>
+      </div>
+
+      <h3>Cara Menggunakan WITZ AI</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Pilih Provider AI</h4>
+            <p>Di pojok kanan atas halaman WITZ AI, pilih provider AI yang ingin digunakan. Hanya provider dengan API key valid yang akan muncul.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Gunakan Prompt Cepat (Opsional)</h4>
+            <p>Klik salah satu dari 4 tombol prompt cepat untuk analisis instan: Analisis Risiko, Strategi Rebalancing, Peluang DeFi, atau Performa Terbaik.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Ketik Pertanyaan Anda</h4>
+            <p>Tulis pertanyaan dalam kolom input dan tekan <strong>Enter</strong> atau klik tombol <strong>KIRIM</strong>. AI akan menjawab dalam Bahasa Indonesia.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Contoh Pertanyaan Efektif</h3>
+      <ul>
+        <li>"Apa risiko terbesar dalam portofolio saya saat ini?"</li>
+        <li>"Sebaiknya saya mengurangi posisi ARB atau MATIC? Berikan alasan berdasarkan data."</li>
+        <li>"Bagaimana korelasi antara ETH dan SOL di portofolio saya?"</li>
+        <li>"Berikan strategi rebalancing konkret jika pasar turun 20%."</li>
+        <li>"Aset mana yang overweight berdasarkan profil risiko portofolio saya?"</li>
+      </ul>
+
+      <h3>Memahami Sinyal WITZ</h3>
+      <p>Setiap respons AI diakhiri dengan <strong>⚡ SINYAL WITZ:</strong> — satu baris kesimpulan singkat yang merangkum analisis dan rekomendasi utama.</p>
+    </section>
+
+    <!-- ══ 8. MULTI-AI PROVIDER ══════════════════════════════ -->
+    <section id="multi-ai">
+      <h2><span class="sec-num">08</span>Multi-AI Provider</h2>
+      <div class="section-line"></div>
+
+      <p>WITZ mendukung 4 provider AI yang dapat digunakan bersamaan. Anda bisa beralih antar provider dalam satu percakapan untuk membandingkan perspektif analisis yang berbeda.</p>
+
+      <div class="ai-grid">
+        <div class="ai-card">
+          <div class="ai-name">◬ Claude (Anthropic)</div>
+          <div class="ai-model">claude-sonnet-4-20250514</div>
+          <div class="ai-desc">Model paling akurat untuk analisis keuangan dan portofolio kompleks. Sangat baik dalam pemahaman konteks nuansa.</div>
+          <div class="ai-badge" style="background:rgba(192,106,255,0.1);color:#C06AFF;border:1px solid rgba(192,106,255,0.25)">⭐ Direkomendasikan</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-name">◈ GPT-4o (OpenAI)</div>
+          <div class="ai-model">gpt-4o</div>
+          <div class="ai-desc">Model flagship OpenAI dengan kemampuan reasoning yang kuat. Populer dan terkenal reliabel untuk analisis data.</div>
+          <div class="ai-badge" style="background:rgba(16,163,127,0.1);color:#10A37F;border:1px solid rgba(16,163,127,0.25)">Populer</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-name">◑ Gemini Pro (Google)</div>
+          <div class="ai-model">gemini-1.5-pro</div>
+          <div class="ai-desc">AI Google dengan konteks window besar. Unggul dalam analisis data pasar dan pencarian informasi terkini.</div>
+          <div class="ai-badge" style="background:rgba(66,133,244,0.1);color:#4285F4;border:1px solid rgba(66,133,244,0.25)">Gratis Tier Besar</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-name">⬡ Llama 3.3 (Groq)</div>
+          <div class="ai-model">llama-3.3-70b-versatile</div>
+          <div class="ai-desc">Model open-source Meta yang dijalankan di chip Groq khusus. Respons ultra-cepat dan GRATIS penuh tanpa kartu kredit.</div>
+          <div class="ai-badge" style="background:rgba(245,80,54,0.1);color:#F55036;border:1px solid rgba(245,80,54,0.25)">🔥 100% Gratis</div>
+        </div>
+      </div>
+
+      <h3>Cara Kerja Konteks Portofolio</h3>
+      <p>Setiap kali Anda mengirim pertanyaan, WITZ secara otomatis menyertakan <strong>snapshot live portofolio</strong> Anda sebagai konteks:</p>
+      <ul>
+        <li>Nilai total portofolio saat ini</li>
+        <li>P&L 24 jam dalam nominal dan persentase</li>
+        <li>Daftar semua aset: harga, jumlah, perubahan 24 jam, bobot, dan tingkat risiko</li>
+        <li>Data pasar global: dominasi BTC, total market cap, perubahan 24 jam</li>
+      </ul>
+      <p>Ini memungkinkan AI memberikan analisis yang spesifik pada portofolio Anda, bukan jawaban generik.</p>
+    </section>
+
+    <!-- ══ 9. DEFI RISK ══════════════════════════════════════ -->
+    <section id="defi-risk">
+      <h2><span class="sec-num">09</span>DeFi Risk Center</h2>
+      <div class="section-line"></div>
+
+      <p>Halaman DeFi Risk menampilkan analisis mendalam tentang risiko protokol DeFi utama beserta AI scanning yang disesuaikan dengan profil portofolio Anda.</p>
+
+      <h3>Radar Risiko</h3>
+      <p>Grafik radar menampilkan 6 dimensi risiko portofolio Anda:</p>
+      <table class="tbl">
+        <thead><tr><th>Dimensi</th><th>Artinya</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Smart Contract</strong></td><td>Risiko bug atau exploit pada kode smart contract yang digunakan</td></tr>
+          <tr><td><strong>Likuiditas</strong></td><td>Risiko tidak cukupnya likuiditas saat ingin menjual atau menukar aset</td></tr>
+          <tr><td><strong>Pasar</strong></td><td>Risiko fluktuasi harga yang ekstrem akibat kondisi pasar</td></tr>
+          <tr><td><strong>Regulasi</strong></td><td>Risiko perubahan regulasi yang dapat mempengaruhi aset kripto</td></tr>
+          <tr><td><strong>Counterparty</strong></td><td>Risiko kegagalan pihak ketiga (exchange, protokol, custodian)</td></tr>
+          <tr><td><strong>Oracle</strong></td><td>Risiko manipulasi atau kegagalan data harga dari oracle</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Matriks Risiko Protokol</h3>
+      <p>Tabel di bagian bawah menampilkan 6 protokol DeFi utama dengan metrik risiko terperinci:</p>
+      <ul>
+        <li><strong>TVL</strong> — Total Value Locked, semakin besar semakin teruji</li>
+        <li><strong>APY</strong> — Annual Percentage Yield, imbal hasil tahunan</li>
+        <li><strong>Skor Risiko</strong> — 0 (sangat aman) hingga 100 (sangat berisiko)</li>
+        <li><strong>Auditor</strong> — Perusahaan audit keamanan yang telah memeriksa kode</li>
+        <li><strong>Risiko Rug</strong> — Kemungkinan proyek tiba-tiba ditinggalkan tim</li>
+      </ul>
+
+      <h3>AI Risk Scan</h3>
+      <p>Klik tombol <strong>"⬡ AI RISK SCAN"</strong> untuk mendapatkan laporan risiko komprehensif yang mempertimbangkan data portofolio nyata Anda. Laporan mencakup:</p>
+      <ul>
+        <li>Skor risiko keseluruhan 0–100</li>
+        <li>Tiga risiko utama dengan langkah mitigasi konkret</li>
+        <li>Evaluasi kualitas eksposur DeFi Anda</li>
+        <li>Satu rekomendasi rebalancing yang spesifik</li>
+      </ul>
+    </section>
+
+    <!-- ══ 10. TRANSAKSI ══════════════════════════════════════ -->
+    <section id="transaksi">
+      <h2><span class="sec-num">10</span>Transaksi</h2>
+      <div class="section-line"></div>
+
+      <p>Halaman Transaksi menampilkan histori aktivitas on-chain dengan nilai yang dihitung ulang menggunakan harga live saat ini.</p>
+
+      <h3>Tipe Transaksi</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin:14px 0">
+        <span class="pill green">BUY — Pembelian</span>
+        <span class="pill pink">SELL — Penjualan</span>
+        <span class="pill" style="background:rgba(153,69,255,0.08);color:#9945FF;border:1px solid rgba(153,69,255,0.2)">STAKE — Staking</span>
+        <span class="pill cyan">SWAP — Pertukaran</span>
+      </div>
+
+      <h3>Kolom Transaksi</h3>
+      <table class="tbl">
+        <thead><tr><th>Kolom</th><th>Deskripsi</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Tipe</strong></td><td>Jenis transaksi dengan warna yang berbeda untuk identifikasi cepat</td></tr>
+          <tr><td><strong>Aset</strong></td><td>Simbol kripto yang terlibat dalam transaksi</td></tr>
+          <tr><td><strong>Jumlah</strong></td><td>Kuantitas token yang ditransaksikan</td></tr>
+          <tr><td><strong>Nilai Live</strong></td><td>Nilai transaksi dihitung ulang menggunakan harga terkini (bukan harga saat transaksi)</td></tr>
+          <tr><td><strong>Tx Hash</strong></td><td>Hash transaksi blockchain dalam format tersamarkan. Klik untuk detail</td></tr>
+          <tr><td><strong>Waktu</strong></td><td>Waktu relatif transaksi (2j lalu, 1h lalu, dll.)</td></tr>
+          <tr><td><strong>Status</strong></td><td><span class="pill green">CONFIRMED</span> atau <span class="pill orange">PENDING</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ══ 11. ANALITIK ═══════════════════════════════════════ -->
+    <section id="analitik">
+      <h2><span class="sec-num">11</span>Analitik</h2>
+      <div class="section-line"></div>
+
+      <p>Halaman Analitik menyediakan visualisasi mendalam pergerakan harga aset utama dan perbandingan performa seluruh portofolio.</p>
+
+      <h3>Chart BTC & ETH 30 Hari</h3>
+      <p>Dua grafik area berdampingan menampilkan pergerakan harga Bitcoin dan Ethereum selama 30 hari terakhir menggunakan data real dari CoinGecko. Hover untuk melihat harga pada tanggal tertentu.</p>
+
+      <h3>Performa 24 Jam Semua Aset</h3>
+      <p>Bar chart horizontal menampilkan persentase perubahan harga 24 jam untuk semua aset dalam portofolio secara bersamaan, sehingga mudah membandingkan performa relatif antar aset.</p>
+      <ul>
+        <li><strong style="color:var(--green)">Batang hijau</strong> — Aset mengalami kenaikan harga</li>
+        <li><strong style="color:var(--pink)">Batang merah</strong> — Aset mengalami penurunan harga</li>
+      </ul>
+    </section>
+
+    <!-- ══ 12. MARKET LIVE ════════════════════════════════════ -->
+    <section id="market">
+      <h2><span class="sec-num">12</span>Market Live</h2>
+      <div class="section-line"></div>
+
+      <p>Halaman Market Live memberikan gambaran kondisi pasar kripto secara keseluruhan, bukan hanya aset portofolio Anda.</p>
+
+      <h3>Statistik Global</h3>
+      <ul>
+        <li><strong>Total Market Cap</strong> — Nilai total seluruh kripto di pasar (dalam Triliun USD)</li>
+        <li><strong>Dominasi BTC</strong> — Persentase Bitcoin dari total market cap. Di atas 60% menandakan pasar konservatif.</li>
+        <li><strong>Perubahan 24J</strong> — Perubahan total market cap dalam 24 jam</li>
+      </ul>
+
+      <h3>Tabel Harga Live</h3>
+      <p>Seluruh aset portofolio ditampilkan dengan data lengkap: harga terkini, perubahan 24 jam, market cap, dan volume trading 24 jam. Data diperbarui setiap 30 detik.</p>
+
+      <h3>🔥 Trending CoinGecko</h3>
+      <p>Daftar 7 kripto yang paling banyak dicari dan diperbincangkan di CoinGecko dalam 24 jam terakhir. Berguna untuk memantau sentimen pasar dan aset yang sedang naik daun.</p>
+    </section>
+
+    <!-- ══ 13. KEAMANAN ═══════════════════════════════════════ -->
+    <section id="keamanan">
+      <h2><span class="sec-num">13</span>Keamanan & Privasi</h2>
+      <div class="section-line"></div>
+
+      <p>WITZ dirancang dengan prinsip <strong>keamanan berlapis</strong>. Berikut adalah semua lapisan perlindungan yang aktif:</p>
+
+      <div class="sec-check">
+        <div class="sec-item"><span class="si-icon">🔒</span><div><div class="si-title">Wallet Gate (Gerbang Akses)</div><div class="si-desc">100% fitur terkunci tanpa wallet terhubung. Tidak ada data yang dimuat, tidak ada API yang dipanggil sebelum autentikasi wallet.</div></div></div>
+        <div class="sec-item"><span class="si-icon">🔑</span><div><div class="si-title">API Key di .env (Tidak di Kode)</div><div class="si-desc">Semua API key disimpan di file .env.local yang tidak pernah dicommit ke Git dan tidak pernah muncul di kode sumber aplikasi.</div></div></div>
+        <div class="sec-item"><span class="si-icon">🛡</span><div><div class="si-title">Proxy Vite (Key Tersembunyi)</div><div class="si-desc">Permintaan ke AI dikirim melalui proxy lokal. API key tidak pernah terekspos di browser DevTools atau network tab.</div></div></div>
+        <div class="sec-item"><span class="si-icon">🧹</span><div><div class="si-title">Sanitasi Input</div><div class="si-desc">Semua input pengguna dibersihkan dari tag HTML dan karakter berbahaya sebelum dikirim ke AI (perlindungan XSS).</div></div></div>
+        <div class="sec-item"><span class="si-icon">👁</span><div><div class="si-title">Read-Only Wallet</div><div class="si-desc">WITZ hanya meminta izin baca alamat wallet. Tidak ada izin tanda tangan, transfer, atau interaksi kontrak apapun.</div></div></div>
+        <div class="sec-item"><span class="si-icon">🎭</span><div><div class="si-title">Masking Alamat</div><div class="si-desc">Alamat wallet selalu ditampilkan dalam format tersamarkan (0x8f4a····2d1e) untuk melindungi privasi Anda.</div></div></div>
+        <div class="sec-item"><span class="si-icon">⏱</span><div><div class="si-title">Rate Limiting</div><div class="si-desc">Pembatas laju panggilan API bawaan mencegah penggunaan berlebihan yang tidak disengaja dan melindungi dari serangan brute force.</div></div></div>
+        <div class="sec-item"><span class="si-icon">💾</span><div><div class="si-title">Tidak Ada Data Tersimpan</div><div class="si-desc">WITZ tidak menyimpan data portofolio Anda di server manapun. Semua data hanya ada di memori browser selama sesi berlangsung.</div></div></div>
+      </div>
+
+      <h3>Rekomendasi Keamanan untuk Pengguna</h3>
+      <ul>
+        <li>Selalu periksa alamat URL sebelum menghubungkan wallet</li>
+        <li>Jangan pernah menyetujui permintaan tanda tangan yang tidak Anda pahami</li>
+        <li>Gunakan wallet terpisah untuk eksperimen — jangan gunakan wallet utama Anda</li>
+        <li>Pertimbangkan hardware wallet (Ledger) untuk aset dalam jumlah besar</li>
+        <li>Jangan bagikan file <code>.env.local</code> kepada siapapun</li>
+      </ul>
+    </section>
+
+    <!-- ══ 14. TROUBLESHOOTING ═══════════════════════════════ -->
+    <section id="troubleshoot">
+      <h2><span class="sec-num">14</span>Troubleshooting</h2>
+      <div class="section-line"></div>
+
+      <table class="tbl">
+        <thead><tr><th>Masalah</th><th>Penyebab</th><th>Solusi</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>npm install gagal</strong></td>
+            <td>Node.js versi lama atau masalah koneksi</td>
+            <td>Update Node.js ke versi 18+. Coba <code>npm install --legacy-peer-deps</code></td>
+          </tr>
+          <tr>
+            <td><strong>Tidak ada data harga</strong></td>
+            <td>CoinGecko rate limit (30 req/menit)</td>
+            <td>Tunggu 60 detik lalu refresh browser. Coba lagi setelah jeda.</td>
+          </tr>
+          <tr>
+            <td><strong>WITZ AI tidak merespons</strong></td>
+            <td>API key belum dikonfigurasi di .env.local</td>
+            <td>Pastikan key sudah ada di <code>.env.local</code> dan format benar. Restart <code>npm run dev</code>.</td>
+          </tr>
+          <tr>
+            <td><strong>Error "KEY_INVALID"</strong></td>
+            <td>API key salah atau kadaluarsa</td>
+            <td>Periksa key di console provider AI Anda. Salin ulang dengan teliti.</td>
+          </tr>
+          <tr>
+            <td><strong>Error CORS</strong></td>
+            <td>Mengakses AI langsung tanpa proxy</td>
+            <td>Selalu gunakan <code>npm run dev</code>. Jangan akses API langsung dari browser.</td>
+          </tr>
+          <tr>
+            <td><strong>Layar putih saat buka</strong></td>
+            <td>Error JavaScript saat startup</td>
+            <td>Buka DevTools (F12), lihat tab Console. Cari pesan error merah.</td>
+          </tr>
+          <tr>
+            <td><strong>Font tidak muncul</strong></td>
+            <td>Tidak ada koneksi ke Google Fonts</td>
+            <td>Periksa koneksi internet. Font diload dari CDN Google.</td>
+          </tr>
+          <tr>
+            <td><strong>Wallet tidak bisa connect</strong></td>
+            <td>Ini adalah koneksi demo simulasi</td>
+            <td>Pilih wallet manapun — WITZ akan membuat alamat demo acak. Tidak butuh wallet nyata untuk testing.</td>
+          </tr>
+          <tr>
+            <td><strong>Perubahan .env tidak efek</strong></td>
+            <td>Server dev perlu restart</td>
+            <td>Hentikan server (Ctrl+C) lalu jalankan kembali <code>npm run dev</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ══ 15. FAQ ════════════════════════════════════════════ -->
+    <section id="faq">
+      <h2><span class="sec-num">15</span>Pertanyaan Umum (FAQ)</h2>
+      <div class="section-line"></div>
+
+      <div class="faq"><div class="faq-q">Apakah WITZ aman digunakan dengan wallet asli saya?</div><div class="faq-a">Ya, WITZ hanya meminta akses baca (read-only) ke alamat wallet Anda. Aplikasi tidak pernah meminta izin tanda tangan, transfer, atau interaksi smart contract. Namun untuk keamanan maksimal, kami tetap menyarankan menggunakan wallet terpisah saat melakukan testing aplikasi baru.</div></div>
+
+      <div class="faq"><div class="faq-q">Data portofolio saya tersimpan di mana?</div><div class="faq-a">Tidak disimpan di mana pun. Semua data hanya ada di memori browser selama sesi berlangsung. Ketika Anda menutup tab atau memutus koneksi wallet, semua data terhapus otomatis. WITZ tidak memiliki backend server yang menyimpan data pengguna.</div></div>
+
+      <div class="faq"><div class="faq-q">Mengapa saya perlu menghubungkan wallet terlebih dahulu?</div><div class="faq-a">Koneksi wallet adalah mekanisme autentikasi utama WITZ. Ini memastikan hanya pengguna yang memiliki akses ke wallet yang dapat melihat data portofolio. Tanpa wallet gate, siapapun yang mengakses URL aplikasi bisa melihat data.</div></div>
+
+      <div class="faq"><div class="faq-q">Provider AI mana yang paling bagus untuk pemula?</div><div class="faq-a">Kami merekomendasikan memulai dengan <strong>Groq (Llama 3.3)</strong> karena sepenuhnya gratis tanpa kartu kredit, respons sangat cepat, dan tidak ada batas yang ketat. Setelah terbiasa, upgrade ke Claude (Anthropic) untuk analisis yang lebih mendalam dan nuanced.</div></div>
+
+      <div class="faq"><div class="faq-q">Apakah data harga dari CoinGecko akurat?</div><div class="faq-a">Ya, CoinGecko adalah salah satu sumber data kripto terpercaya di industri. Data diperbarui setiap 30 detik. Namun selalu ada potensi keterlambatan (delay) beberapa detik hingga menit dibandingkan data exchange real-time.</div></div>
+
+      <div class="faq"><div class="faq-q">Bisakah saya menambah aset kripto lain ke portofolio?</div><div class="faq-a">Dalam versi saat ini, daftar aset dikonfigurasi di file <code>src/services/market.js</code>. Tambahkan ID CoinGecko aset baru ke objek <code>COIN_IDS</code> dan jumlah kepemilikan ke <code>HOLDINGS</code>.</div></div>
+
+      <div class="faq"><div class="faq-q">Bagaimana cara deploy WITZ ke internet (production)?</div><div class="faq-a">Jalankan <code>npm run build</code> untuk membuat folder <code>dist</code>. Upload ke Vercel, Netlify, atau VPS. PENTING: Di production, jangan gunakan proxy Vite — buat backend API server tersendiri (Node.js/FastAPI) untuk mengelola API key dengan aman.</div></div>
+
+      <div class="faq"><div class="faq-q">Kenapa WITZ AI menjawab dalam Bahasa Indonesia?</div><div class="faq-a">System prompt WITZ dirancang untuk meminta AI menjawab dalam Bahasa Indonesia. Anda tetap bisa bertanya dalam Bahasa Inggris dan AI akan menyesuaikan.</div></div>
+    </section>
+
+    <!-- ══ 16. GLOSARIUM ══════════════════════════════════════ -->
+    <section id="glossary">
+      <h2><span class="sec-num">16</span>Glosarium</h2>
+      <div class="section-line"></div>
+
+      <table class="tbl">
+        <thead><tr><th>Istilah</th><th>Definisi</th></tr></thead>
+        <tbody>
+          <tr><td><strong>API Key</strong></td><td>Kunci unik yang diberikan provider layanan (AI, data pasar) untuk mengotentikasi permintaan Anda</td></tr>
+          <tr><td><strong>APY</strong></td><td>Annual Percentage Yield — imbal hasil tahunan dalam persentase, termasuk efek bunga berbunga</td></tr>
+          <tr><td><strong>DeFi</strong></td><td>Decentralized Finance — ekosistem layanan keuangan yang berjalan di blockchain tanpa perantara terpusat</td></tr>
+          <tr><td><strong>DEX</strong></td><td>Decentralized Exchange — bursa pertukaran kripto yang berjalan di smart contract, tanpa otoritas pusat</td></tr>
+          <tr><td><strong>Gas Fee</strong></td><td>Biaya transaksi yang dibayar ke jaringan blockchain (miner/validator) agar transaksi diproses</td></tr>
+          <tr><td><strong>Layer 2</strong></td><td>Jaringan yang dibangun di atas blockchain utama (Layer 1) untuk meningkatkan kecepatan dan mengurangi biaya</td></tr>
+          <tr><td><strong>Market Cap</strong></td><td>Kapitalisasi pasar — total nilai aset (harga × jumlah beredar)</td></tr>
+          <tr><td><strong>Oracle</strong></td><td>Layanan yang menyediakan data dunia nyata (seperti harga aset) ke smart contract</td></tr>
+          <tr><td><strong>P&L</strong></td><td>Profit & Loss — keuntungan dan kerugian</td></tr>
+          <tr><td><strong>Private Key</strong></td><td>Kunci kriptografi rahasia yang membuktikan kepemilikan wallet. Jangan pernah dibagikan!</td></tr>
+          <tr><td><strong>Rebalancing</strong></td><td>Penyesuaian alokasi portofolio kembali ke target semula setelah pergerakan harga mengubah bobotnya</td></tr>
+          <tr><td><strong>Read-Only</strong></td><td>Akses yang hanya bisa membaca data tanpa bisa mengubah atau bertransaksi</td></tr>
+          <tr><td><strong>Rug Pull</strong></td><td>Penipuan di mana tim proyek tiba-tiba menarik semua likuiditas dan meninggalkan investor</td></tr>
+          <tr><td><strong>Smart Contract</strong></td><td>Program komputer yang berjalan di blockchain dan mengeksekusi kondisi perjanjian secara otomatis</td></tr>
+          <tr><td><strong>Staking</strong></td><td>Mengunci aset kripto di jaringan untuk memvalidasi transaksi dan mendapat imbalan</td></tr>
+          <tr><td><strong>TVL</strong></td><td>Total Value Locked — total nilai aset yang terkunci di protokol DeFi</td></tr>
+          <tr><td><strong>Wallet</strong></td><td>Perangkat lunak atau keras yang menyimpan kunci kriptografi untuk mengakses aset blockchain</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+  </div>
+</div>
+
+<!-- ══ FOOTER ══════════════════════════════════════════════ -->
+<footer>
+  <div class="f-left">
+    <div style="font-weight:700;color:rgba(255,255,255,0.7);margin-bottom:4px">⚡ WITZ Documentation</div>
+    <div>© 2025 WITZ · Untuk keperluan edukasi dan pengembangan · Bukan saran finansial</div>
+  </div>
+  <div class="f-ver">v2.0.0</div>
+</footer>
+
+<script>
+// Scroll progress bar
+window.addEventListener('scroll',()=>{
+  const total=document.body.scrollHeight-window.innerHeight
+  document.getElementById('prog').style.width=(window.scrollY/total*100)+'%'
+},{passive:true})
+
+// Active sidebar link on scroll
+const sections=[...document.querySelectorAll('section[id]')]
+const links=[...document.querySelectorAll('.sb-link')]
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(l=>l.classList.remove('active'))
+      const a=document.querySelector(`.sb-link[href="#${e.target.id}"]`)
+      if(a)a.classList.add('active')
+    }
+  })
+},{rootMargin:'-20% 0px -75% 0px'})
+sections.forEach(s=>obs.observe(s))
+
+// FAQ accordion
+document.querySelectorAll('.faq').forEach(f=>{
+  f.querySelector('.faq-q').addEventListener('click',()=>{
+    const isOpen=f.classList.contains('open')
+    document.querySelectorAll('.faq').forEach(x=>x.classList.remove('open'))
+    if(!isOpen)f.classList.add('open')
+  })
+})
+
+// Smooth scroll for sidebar links
+document.querySelectorAll('.sb-link[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault()
+    const target=document.querySelector(a.getAttribute('href'))
+    if(target)target.scrollIntoView({behavior:'smooth',block:'start'})
+  })
+})
+</script>
+</body>
+</html>
